@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+    <input type="text" id="searchInput" placeholder="Search...">
+
+<ul id="list">
+  <li>Apple</li>
+  <li>Banana</li>
+  <li>Cherry</li>
+  <li>Orange</li>
+  <li>Pineapple</li>
+  <li>Strawberry</li>
+</ul>
+
+<script>
+const searchInput = document.getElementById('searchInput');
+const list = document.getElementById('list');
+const items = list.getElementsByTagName('li');
+
+searchInput.addEventListener('keyup', function() {
+  const searchTerm = searchInput.value.toLowerCase();
+
+  for (let i = 0; i < items.length; i++) {
+    const text = items[i].innerText.toLowerCase();
+    if (text.indexOf(searchTerm) > -1) {
+      items[i].style.display = '';
+    } else {
+      items[i].style.display = 'none';
+    }
+  }
+});
+
+searchInput.addEventListener('input', function() {
+  const searchTerm = searchInput.value.toLowerCase();
+  const filteredItems = Array.from(items).filter(item => item.innerText.toLowerCase().indexOf(searchTerm) > -1);
+  Array.from(items).forEach(item => item.style.display = 'none');
+  filteredItems.forEach(item => item.style.display = '');
+});
+
+</script>
+
+</body>
+</html>
